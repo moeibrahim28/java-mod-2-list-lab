@@ -13,7 +13,7 @@ public class Main {
 
         while (runValue) {
             int userChoice = whatIsUserDoing(scanner);
-            if (userChoice != 3) {
+            if (userChoice != 4) {
                 switch (userChoice) {
                     case 1:
                         Book book = getBookInfo(scanner);
@@ -21,6 +21,9 @@ public class Main {
                         break;
                     case 2:
                         isFound(scanner, library);
+                        break;
+                    case 3:
+                        isFoundGenre(scanner, library);
                         break;
                 }
             } else {
@@ -30,17 +33,30 @@ public class Main {
 
             }
         }
+        
     }
 
     public static int whatIsUserDoing(Scanner scanner) {
         int userChoice = 0;
         System.out.println("What would you like to do?");
-        System.out.println("1. Add a book\n2. Look up a book\n3. Exit");
+        System.out.println("1. Add a book\n2. Look up a book\n3. Look up genres\n4. Exit");
         String sampleString = scanner.next();
         userChoice = getInput(sampleString);
         return userChoice;
     }
 
+    public static void isFoundGenre(Scanner scanner, Library library) {
+        String input;
+        System.out.println("What genre are you searching for? Please enter the genre:");
+        input = scanner.next();
+        boolean containsKey = library.containsGenre(input);
+        if (containsKey == false) {
+            System.out.println("This genre does not exist.");
+        } else {
+            System.out.println("We have books in this genre.");
+        }
+    }
+    
     public static void isFound(Scanner scanner, Library library) {
         String input;
         System.out.println("What book are you searching for? Please enter the title:");
