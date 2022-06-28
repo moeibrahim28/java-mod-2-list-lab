@@ -8,12 +8,12 @@ public class Main {
         System.out.println("Welcome to my library!");
         Scanner scanner = new Scanner(System.in);
         boolean runValue = true;
-        
+
         Library library = new Library();
 
         while (runValue) {
             int userChoice = whatIsUserDoing(scanner);
-            if (userChoice != 2) {
+            if (userChoice != 3) {
                 switch (userChoice) {
                     case 1:
                         Book book = getBookInfo(scanner);
@@ -22,15 +22,13 @@ public class Main {
                     case 2:
                         isFound(scanner, library);
                         break;
-                    case 3:
-                        runValue = false;
-                        System.out.println("Thanks for using my library!");
-                        break;
-
                 }
-            }
+            } else {
+                runValue = false;
+                System.out.println("Thanks for using my library!");
+                break;
 
-            System.out.println(library);
+            }
         }
     }
 
