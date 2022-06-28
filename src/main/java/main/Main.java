@@ -8,31 +8,51 @@ public class Main {
         System.out.println("Welcome to my library!");
         Scanner scanner = new Scanner(System.in);
         boolean runValue = true;
-        int userChoice = whatIsUserDoing(scanner);
+        
         Library library = new Library();
 
         while (runValue) {
+            int userChoice = whatIsUserDoing(scanner);
             if (userChoice != 2) {
-                Book book = getBookInfo(scanner);
-                library.add(book);
-                userChoice = whatIsUserDoing(scanner);
-            } else {
-                runValue = false;
-                System.out.println("Thanks for using my library!");
-            }
-        }
+                switch (userChoice) {
+                    case 1:
+                        Book book = getBookInfo(scanner);
+                        library.add(book);
+                        break;
+                    case 2:
+                        isFound(scanner, library);
+                        break;
+                    case 3:
+                        runValue = false;
+                        System.out.println("Thanks for using my library!");
+                        break;
 
-        
-        System.out.println(library);
+                }
+            }
+
+            System.out.println(library);
+        }
     }
 
     public static int whatIsUserDoing(Scanner scanner) {
         int userChoice = 0;
         System.out.println("What would you like to do?");
-        System.out.println("1. Add a book\n2. Exit");
+        System.out.println("1. Add a book\n2. Look up a book\n3. Exit");
         String sampleString = scanner.next();
         userChoice = getInput(sampleString);
         return userChoice;
+    }
+
+    public static void isFound(Scanner scanner, Library library) {
+        String input;
+        System.out.println("What book are you searching for? Please enter the title:");
+        input = scanner.next();
+        boolean containsKey = library.containsBook(input);
+        if (containsKey == false) {
+            System.out.println("This book does not exist");
+        } else {
+            System.out.println(library.getBook(input));
+        }
     }
 
     public static Book getBookInfo(Scanner scanner) {
@@ -52,7 +72,7 @@ public class Main {
             return Integer.parseInt(sampleString);
         } catch (Exception e) {
 
-            return 2;
+            return 3;
         }
     }
 }
