@@ -86,7 +86,7 @@ public class Main {
             return Integer.parseInt(sampleString);
         } catch (Exception e) {
 
-            return 3;
+            return 0;
         }
     }
 }
